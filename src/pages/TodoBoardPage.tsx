@@ -1,9 +1,9 @@
 import { memo } from "react";
-import { MemoList } from "../organism/MemoList";
-import HeaderLayout from "../templates/HeaderLayout";
+import { MemoList } from "../components/organism/MemoList";
+import HeaderLayout from "../components/templates/HeaderLayout";
 import { Flex } from "@chakra-ui/react";
-import { TodoBoard } from "../organism/TodoBoard";
-import { Head } from "../templates/Head";
+import { TodoBoard } from "../components/organism/TodoBoard";
+import { Head } from "../components/templates/Head";
 
 const TodoBoardPage = memo(() => {
 	return (

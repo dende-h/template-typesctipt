@@ -1,13 +1,14 @@
 import { Box } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+
 import { memo } from "react";
 
-import { Head } from "../templates/Head";
+import { Head } from "../components/templates/Head";
 
-export const Blank = memo(() => {
-	const { state } = useLocation();
-	const navigate = useNavigate();
+const Blank = memo(() => {
+	const router = useRouter();
 	setTimeout(() => {
-		navigate("/login", { state, replace: false });
+		router.push("/login");
 	}, 5000);
 
 	return (
@@ -22,3 +23,4 @@ export const Blank = memo(() => {
 		</>
 	);
 });
+export default Blank;

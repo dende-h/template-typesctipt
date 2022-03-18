@@ -1,9 +1,9 @@
 import { memo } from "react";
-import { Calendar } from "../organism/Calendar";
-import { MemoList } from "../organism/MemoList";
-import HeaderLayout from "../templates/HeaderLayout";
+import { Calendar } from "../components/organism/Calendar";
+import { MemoList } from "../components/organism/MemoList";
+import HeaderLayout from "../components/templates/HeaderLayout";
 import { Flex } from "@chakra-ui/react";
-import { Head } from "../templates/Head";
+import { Head } from "../components/templates/Head";
 
 const TopPage = memo(() => {
 	return (

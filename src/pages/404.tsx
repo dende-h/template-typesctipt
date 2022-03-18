@@ -1,10 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import { memo } from "react";
 
-import { PrimaryButton } from "../atoms/PrimaryButton";
-import { Head } from "../templates/Head";
+import { PrimaryButton } from "../components/atoms/PrimaryButton";
+import { Head } from "../components/templates/Head";
 
-const Page404 = memo(() => {
+const Custom404 = memo(() => {
 	return (
 		<>
 			<Head>
@@ -26,11 +27,13 @@ const Page404 = memo(() => {
 				</Box>
 				<Box>
 					<PrimaryButton bgColor={"cyan.600"} color={"white"}>
-						<Link to={"/"}>Topへ戻る</Link>
+						<Link href="/">
+							<Text as="a">Topへ戻る</Text>
+						</Link>
 					</PrimaryButton>
 				</Box>
 			</Box>
 		</>
 	);
 });
-export default Page404;
+export default Custom404;

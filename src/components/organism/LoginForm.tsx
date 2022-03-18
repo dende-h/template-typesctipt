@@ -1,4 +1,5 @@
 import { Box, Button, Divider, Flex, Heading, Input, Stack, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import { memo, VFC } from "react";
 
 import { useAuthLogin } from "../../hooks/useAuthLogin";
@@ -46,10 +47,9 @@ export const LoginForm: VFC = memo(() => {
 						>
 							ログイン
 						</Button>
-						<Link to={"/"}>
-							{" "}
+						<Link href={"/"}>
 							<Text
-								as={"h1"}
+								as={"a"}
 								fontSize={"15px"}
 								fontFamily={"serif"}
 								_hover={{ color: "teal", fontWeight: "bold", textDecoration: "underline" }}

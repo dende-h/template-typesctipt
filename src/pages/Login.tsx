@@ -1,15 +1,17 @@
 import { memo, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useRecoilValue } from "recoil";
 
-import { LoginForm } from "../organism/LoginForm";
-import { Head } from "../templates/Head";
-import TitleHeaderFooterLayout from "../templates/TitleHeaderFooterLayout";
+import { LoginForm } from "../components/organism/LoginForm";
+import { Head } from "../components/templates/Head";
+import TitleHeaderFooterLayout from "../components/templates/TitleHeaderFooterLayout";
+import { isOnSwitch } from "../globalState/Readme/isOnSwitch";
 
-export const Login = memo(() => {
-	const { state } = useLocation();
+const Login = memo(() => {
+	const isOn = useRecoilValue(isOnSwitch);
 	const [trueCount, setTrueCount] = useState<number>(0);
 	useEffect(() => {
-		if (state === true) {
+		if (isOn) {
 			setTrueCount(trueCount + 1);
 		}
 		if (trueCount === 1) {
@@ -17,7 +19,7 @@ export const Login = memo(() => {
 				icon: "👏"
 			});
 		}
-	}, [state]);
+	}, [isOn]);
 	return (
 		<>
 			<Head>
@@ -30,3 +32,4 @@ export const Login = memo(() => {
 		</>
 	);
 });
+export default Login;

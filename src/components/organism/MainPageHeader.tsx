@@ -1,4 +1,6 @@
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { memo } from "react";
 
 import { useSetRecoilState } from "recoil";
@@ -7,11 +9,11 @@ import { PrimaryButton } from "../atoms/PrimaryButton";
 
 export const MainPageHeader = memo(() => {
 	const setIsAuth = useSetRecoilState(isAuthenticated);
-	const navigate = useNavigate();
+	const router = useRouter();
 	const onClickRouter = () => {
 		setIsAuth(false);
 		localStorage.removeItem("authToken");
-		navigate("/");
+		router.push("/");
 	};
 	return (
 		<>
@@ -20,10 +22,14 @@ export const MainPageHeader = memo(() => {
 					“ Note Me ”
 				</Box>
 				<Box p={[0, 1, 5]} _hover={{ color: "blue" }}>
-					<Link to={"/board"}>Show TodoBoard</Link>
+					<Link href={"/TodoBoardPage"}>
+						<Text as={"a"}>Show TodoBoard</Text>
+					</Link>
 				</Box>
 				<Box p={[0, 1, 5]} _hover={{ color: "blue" }}>
-					<Link to={"/top"}>Show Calendar</Link>
+					<Link href={"/TopPage"}>
+						<Text as={"a"}>Show Calendar</Text>
+					</Link>
 				</Box>
 				<Spacer />
 				<Box p={[0, 2, 3]}>

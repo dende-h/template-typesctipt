@@ -6,16 +6,17 @@ import { isOnSwitch } from "../../globalState/Readme/isOnSwitch";
 
 import { memo, useCallback } from "react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export const ReadMe = memo(() => {
 	const [isOn, setIsOn] = useRecoilState(isOnSwitch);
-	const navigate = useNavigate();
+	const router = useRouter();
 	const onSlideSwitch: (event: React.ChangeEvent<HTMLInputElement>) => void = useCallback(() => {
 		setTimeout(() => {
 			if (isOn) {
 				toast.error("シャットダウンします");
 				setIsOn(false);
-				navigate("/blank", { state: isOn, replace: true });
+				router.push("/Blank");
 			}
 		}, 3000);
 		if (!isOn) {

@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,14 +14,14 @@ type Props = {
 export const useAuthLogin = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [isAuth, setIsAuth] = useRecoilState(isAuthenticated);
-	const navigate: NavigateFunction = useNavigate();
+	const router = useRouter();
 	const authLogin = useCallback(async (authKey: Props) => {
 		try {
 			setLoading(true);
 			const result: AxiosResponse = await loginApi.post("/login", authKey);
 			localStorage.setItem("authToken", result.data.access_token);
 			setIsAuth(true);
-			navigate("/top", { state: result, replace: false });
+			router.push("/top");
 		} catch (error) {
 			setLoading(false);
 			toast.error("ログインできません!");

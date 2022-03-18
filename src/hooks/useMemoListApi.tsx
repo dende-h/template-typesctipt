@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -14,12 +15,12 @@ export const useMemoApi = () => {
 	const setIsAuth = useSetRecoilState(isAuthenticated);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [memoList, setMemoList] = useRecoilState<Array<FetchMemoList>>(memoListState);
-	const navigate = useNavigate();
+	const router = useRouter();
 	const authErrorNavigate = useCallback(() => {
 		setIsAuth(false);
 		localStorage.removeItem("authToken");
 		toast.error("ログアウトされました。再度ログインしてください");
-		navigate("/login");
+		router.push("/login");
 	}, []);
 
 	const fetchMemoList = useCallback(async () => {

@@ -1,4 +1,5 @@
 import { Box, Stack, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import { memo, VFC } from "react";
 import toast from "react-hot-toast";
 
@@ -42,10 +43,9 @@ export const AppIntroduction: VFC = memo(() => {
 						新規アカウント登録
 					</PrimaryButton>
 				</Box>
-				<Link to={"/login"}>
-					{" "}
+				<Link href={"/Login"}>
 					<Text
-						as={"h1"}
+						as={"a"}
 						fontSize={"20px"}
 						fontFamily={"serif"}
 						_hover={{ color: "teal", fontWeight: "bold", textDecoration: "underline" }}
