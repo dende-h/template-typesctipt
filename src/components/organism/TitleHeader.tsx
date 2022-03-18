@@ -12,7 +12,7 @@ export const TitleHeader: VFC<Props> = memo(() => {
 				position={"relative"}
 				w="100%"
 				h={["1000px", "1000px", "800px"]}
-				backgroundImage={`url(${process.env.PUBLIC_URL}/business-pug-working-on-laptop.jpg)`}
+				backgroundImage={`url(/business-pug-working-on-laptop.jpg)`}
 				backgroundPosition={"bottom"}
 				backgroundSize={"cover"}
 				zIndex={1}

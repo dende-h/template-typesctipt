@@ -12,7 +12,7 @@ export const AppIntroduction: VFC = memo(() => {
 	};
 	return (
 		<Box
-			backgroundImage={`url(${process.env.PUBLIC_URL}/KAZ829001.jpg)`}
+			backgroundImage={`url(/KAZ829001.jpg)`}
 			backgroundSize={["cover"]}
 			w={"70%"}
 			h={"800px"}

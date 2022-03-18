@@ -17,7 +17,7 @@ export const AppIntroductionImage: VFC = memo(() => {
 			w={"100%"}
 			h={"800px"}
 			bgColor={"gray.200"}
-			backgroundImage={`url(${process.env.PUBLIC_URL}/pablo_picasso_38.png)`}
+			backgroundImage={`url(/pablo_picasso_38.png)`}
 			backgroundSize={"contain"}
 			backgroundPosition="center"
 		>
@@ -28,7 +28,7 @@ export const AppIntroductionImage: VFC = memo(() => {
 				top={0}
 				left={0}
 				backgroundSize={"cover"}
-				backgroundImage={`url(${process.env.PUBLIC_URL}/cat9302345_TP_V.jpg)`}
+				backgroundImage={`url(/cat9302345_TP_V.jpg)`}
 				opacity={"0.4"}
 				_hover={{ opacity: "1" }}
 				onMouseOver={() => open()}
