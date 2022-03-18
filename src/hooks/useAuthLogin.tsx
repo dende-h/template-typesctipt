@@ -21,7 +21,7 @@ export const useAuthLogin = () => {
 			const result: AxiosResponse = await loginApi.post("/login", authKey);
 			localStorage.setItem("authToken", result.data.access_token);
 			setIsAuth(true);
-			router.push("/top");
+			router.push("/TopPage");
 		} catch (error) {
 			setLoading(false);
 			toast.error("ログインできません!");

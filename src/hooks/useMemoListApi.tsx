@@ -20,7 +20,7 @@ export const useMemoApi = () => {
 		setIsAuth(false);
 		localStorage.removeItem("authToken");
 		toast.error("ログアウトされました。再度ログインしてください");
-		router.push("/login");
+		router.push("/Login");
 	}, []);
 
 	const fetchMemoList = useCallback(async () => {

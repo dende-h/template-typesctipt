@@ -8,7 +8,7 @@ import { Head } from "../components/templates/Head";
 const Blank = memo(() => {
 	const router = useRouter();
 	setTimeout(() => {
-		router.push("/login");
+		router.push("/Login");
 	}, 5000);
 
 	return (
