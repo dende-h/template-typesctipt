@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-
+import { UserProvider } from "@auth0/nextjs-auth0";
 import theme from "../theme";
 import { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
@@ -10,7 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<ChakraProvider resetCSS theme={theme}>
 			<RecoilRoot>
 				<Toaster position="top-center" reverseOrder={false} />
-				<Component {...pageProps} />
+				<UserProvider>
+					<Component {...pageProps} />
+				</UserProvider>
 			</RecoilRoot>
 		</ChakraProvider>
 	);

@@ -6,6 +6,10 @@ import { TodoBoard } from "../components/organism/TodoBoard";
 import { Head } from "../components/templates/Head";
 
 const TodoBoardPage = memo(() => {
+
+
+
+	
 	return (
 		<>
 			<Head>

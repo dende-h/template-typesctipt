@@ -4,6 +4,7 @@ import FirstPageFooterLayout from "../components/templates/FirstPageFooterLayout
 import { AppIntroduction } from "../components/organism/AppIntroduction";
 import { AppIntroductionImage } from "../components/organism/AppIntroductionImage";
 import { Head } from "../components/templates/Head";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 const Index = memo(() => {
 	return (
@@ -21,5 +22,6 @@ const Index = memo(() => {
 		</>
 	);
 });
+export const getServerSideProps = withPageAuthRequired();
 
 export default Index;

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const token: string | null = localStorage.getItem("authToken");
 
-const baseURL: string | undefined = process.env.REACT_APP_BASE_URL;
+const baseURL: string | undefined = process.env.NEXT_PUBLIC_BASE_URL;
 const headers = { "Content-Type": "application/json" };
 
 const postHeaders = { "Content-Type": "application/json", Authorization: `Bearer ${token}` };

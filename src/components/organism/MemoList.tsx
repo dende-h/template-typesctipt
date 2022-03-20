@@ -10,18 +10,7 @@ import { useDragDropData } from "../../hooks/useDragDropData";
 import { MemoListHandle } from "./MemoListHandle";
 
 export const MemoList: VFC = memo(() => {
-	const { fetchMemoList, memoList, loading } = useMemoApi();
-	const setMemoList = useSetRecoilState<FetchMemoList[]>(memoListState);
-	const { setApiData } = useDragDropData();
 
-	useEffect(() => {
-		fetchMemoList();
-	}, []);
-
-	useEffect(() => {
-		setMemoList(memoList);
-		setApiData(memoList);
-	}, [memoList]);
 
 	return (
 		<>
