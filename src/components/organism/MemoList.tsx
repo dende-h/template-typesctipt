@@ -10,7 +10,6 @@ import { useDragDropData } from "../../hooks/useDragDropData";
 import { MemoListHandle } from "./MemoListHandle";
 
 export const MemoList: VFC = memo(() => {
-	const { loading } = useMemoApi();
 	return (
 		<>
 			<Box
@@ -38,24 +37,7 @@ export const MemoList: VFC = memo(() => {
 					<CategoryTab>
 						<Box>
 							<Divider />
-							{loading ? (
-								<Stack>
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-									<Skeleton height="50px" />
-								</Stack>
-							) : (
-								<MemoListHandle />
-							)}
+							<MemoListHandle />
 						</Box>
 					</CategoryTab>
 				</Stack>

@@ -1,21 +1,9 @@
 import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { memo } from "react";
-
-import { useSetRecoilState } from "recoil";
-import { isAuthenticated } from "../../globalState/isAuthenticated";
 import { PrimaryButton } from "../atoms/PrimaryButton";
-import { handleAuth } from "@auth0/nextjs-auth0";
 
 export const MainPageHeader = memo(() => {
-	const setIsAuth = useSetRecoilState(isAuthenticated);
-	const router = useRouter();
-	const onClickRouter = () => {
-		setIsAuth(false);
-		localStorage.removeItem("authToken");
-		router.push("/");
-	};
 	return (
 		<>
 			<Flex bg="teal.100" w="100%" h={["50px", "60px", "70px"]} justifyContent={"center"} fontFamily={"cursive"}>
@@ -28,7 +16,7 @@ export const MainPageHeader = memo(() => {
 					</Link>
 				</Box>
 				<Box p={[0, 1, 5]} _hover={{ color: "blue" }}>
-					<Link href={"/TopPage"}>
+					<Link href={"/"}>
 						<Text as={"a"}>Show Calendar</Text>
 					</Link>
 				</Box>
