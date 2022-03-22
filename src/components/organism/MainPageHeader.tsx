@@ -6,6 +6,7 @@ import { memo } from "react";
 import { useSetRecoilState } from "recoil";
 import { isAuthenticated } from "../../globalState/isAuthenticated";
 import { PrimaryButton } from "../atoms/PrimaryButton";
+import { handleAuth } from "@auth0/nextjs-auth0";
 
 export const MainPageHeader = memo(() => {
 	const setIsAuth = useSetRecoilState(isAuthenticated);
@@ -33,8 +34,8 @@ export const MainPageHeader = memo(() => {
 				</Box>
 				<Spacer />
 				<Box p={[0, 2, 3]}>
-					<PrimaryButton onClick={onClickRouter} bgColor={"telegram.500"} color={"gray.50"} _hover={{ opacity: 0.6 }}>
-						ログアウト
+					<PrimaryButton bgColor={"telegram.500"} color={"gray.50"} _hover={{ opacity: 0.6 }}>
+						<a href="/api/auth/logout">ログアウト</a>
 					</PrimaryButton>
 				</Box>
 			</Flex>

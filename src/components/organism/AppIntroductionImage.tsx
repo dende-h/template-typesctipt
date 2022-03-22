@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { memo, useState, VFC } from "react";
+
 import { PopoverContainer } from "../templates/PopoverContainer";
 
 export const AppIntroductionImage: VFC = memo(() => {

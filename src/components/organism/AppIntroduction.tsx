@@ -1,8 +1,8 @@
 import { Box, Stack, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { memo, VFC } from "react";
+import { memo, useEffect, VFC } from "react";
 import toast from "react-hot-toast";
-
+import { useUser } from "@auth0/nextjs-auth0";
 import { PrimaryButton } from "../atoms/PrimaryButton";
 
 export const AppIntroduction: VFC = memo(() => {

@@ -10,8 +10,7 @@ import { useDragDropData } from "../../hooks/useDragDropData";
 import { MemoListHandle } from "./MemoListHandle";
 
 export const MemoList: VFC = memo(() => {
-
-
+	const { loading } = useMemoApi();
 	return (
 		<>
 			<Box

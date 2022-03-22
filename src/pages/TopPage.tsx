@@ -1,43 +1,49 @@
-import { memo } from "react";
-import { Calendar } from "../components/organism/Calendar";
-import { MemoList } from "../components/organism/MemoList";
-import HeaderLayout from "../components/templates/HeaderLayout";
-import { Flex } from "@chakra-ui/react";
-import { Head } from "../components/templates/Head";
-import { error } from "console";
-import { useMemoApi } from "../hooks/useMemoListApi";
-import { useSetRecoilState } from "recoil";
-import { useDragDropData } from "../hooks/useDragDropData";
-import { memoListState } from "../globalState/memo/memoListState";
-import { FetchMemoList } from "../types/FetchMemoList";
+import { useEffect, useState } from "react";
 
-const getStaticProps = async () => {
-	const { fetchMemoList, memoList, loading } = useMemoApi();
-	const setMemoList = useSetRecoilState<FetchMemoList[]>(memoListState);
-	const { setApiData } = useDragDropData();
-	try {
-		await fetchMemoList();
-		setMemoList(memoList);
-		setApiData(memoList);
-	} catch (error) {
-		console.log(error);
-	}
-};
+import { getSupabase } from "../utils/supabase";
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
-const TopPage = memo(() => {
+import Head from "next/head";
+import Link from "next/link";
+
+const TopPage = ({ user }) => {
+	console.log(user);
+	const supabase = getSupabase(user.access_token);
+	const fetchNote = async () => {
+		const { data: note } = await supabase.from("note").select("*");
+		console.log(note);
+	};
+
+	useEffect(() => {
+		fetchNote();
+	}, []);
+
 	return (
 		<>
 			<Head>
 				<meta charSet="utf-8" />
 				<title>TopPage -Note me</title>
 			</Head>
-			<HeaderLayout>
-				<Flex>
-					<MemoList />
-					<Calendar />
-				</Flex>
-			</HeaderLayout>
+			<Link href="/api/auth/logout">
+				<a>Logout</a>
+			</Link>
 		</>
 	);
+};
+export const getServerSideProps = withPageAuthRequired({
+	async getServerSideProps({ req, res }) {
+		const {
+			user: { accessToken }
+		} = await getSession(req, res);
+
+		const supabase = getSupabase(accessToken);
+
+		const { data: note } = await supabase.from("note").select("*");
+
+		return {
+			props: { note }
+		};
+	}
 });
+
 export default TopPage;
