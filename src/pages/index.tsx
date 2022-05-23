@@ -9,9 +9,12 @@ import { MemoList } from "../components/organism/MemoList";
 import { Calendar } from "../components/organism/Calendar";
 import { useDragDropData } from "../hooks/useDragDropData";
 import { useEffect } from "react";
+import { userState } from "../globalState/user/userState";
 
-const Index = ({ note }) => {
+const Index = ({ user, note }) => {
+	console.log(user);
 	const setMemos = useSetRecoilState(memoListState);
+	const setUser = useSetRecoilState(userState);
 	const { setApiData } = useDragDropData();
 	console.log(note);
 	useEffect(() => {
@@ -19,6 +22,9 @@ const Index = ({ note }) => {
 			setMemos(note);
 			setApiData(note);
 		}
+	}, []);
+	useEffect(() => {
+		setUser(user);
 	}, []);
 
 	// const category = "memo";
