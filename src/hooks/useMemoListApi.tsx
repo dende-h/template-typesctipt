@@ -23,9 +23,8 @@ export const useMemoApi = () => {
 	const router = useRouter();
 	const authErrorNavigate = useCallback(() => {
 		setIsAuth(false);
-		localStorage.removeItem("authToken");
 		toast.error("ログアウトされました。再度ログインしてください");
-		router.push("/Login");
+		router.push("/api/auth/logout");
 	}, []);
 
 	const fetchMemoList = useCallback(async () => {
@@ -35,8 +34,7 @@ export const useMemoApi = () => {
 		setMemoList(data);
 		setLoading(false);
 		if (error) {
-			console.log(error);
-			setLoading(false);
+			authErrorNavigate();
 		}
 	}, []);
 
@@ -48,17 +46,17 @@ export const useMemoApi = () => {
 		console.log(data);
 		fetchMemoList();
 		if (error) {
-			console.log(error);
-			setLoading(false);
+			authErrorNavigate();
 		}
 	}, []);
 
 	const editMemoList = useCallback(async (id: string | undefined, body: body) => {
 		setLoading(true);
-		try {
-			await memoApi.put(`/memo/${id}`, body);
-			fetchMemoList();
-		} catch (error) {
+		const editData = { ...body, user_id: user.sub };
+		const { data, error } = await supabase.from("note").update(editData).eq("id", id);
+		console.log(data);
+		fetchMemoList();
+		if (error) {
 			authErrorNavigate();
 		}
 	}, []);
