@@ -46,7 +46,7 @@ export const useMemoApi = () => {
 		console.log(data);
 		fetchMemoList();
 		if (error) {
-			authErrorNavigate();
+			console.log(error);
 		}
 	}, []);
 
@@ -63,22 +63,22 @@ export const useMemoApi = () => {
 
 	const deleteMemoList = useCallback(async (id: string | undefined) => {
 		setLoading(true);
-		try {
-			await memoApi.delete(`/memo/${id}`);
-			fetchMemoList();
-		} catch (error) {
+		const { data, error } = await supabase.from("note").delete().eq("id", id);
+		console.log(data);
+		fetchMemoList();
+		if (error) {
 			authErrorNavigate();
 		}
 	}, []);
 
 	const editMarkDiv = useCallback(async (id: string | undefined, body: body) => {
 		setLoading(true);
-		try {
-			await memoApi.put(`/memo/${id}`, body);
-			const result: AxiosResponse<Array<FetchMemoList>> = await memoApi.get("/memos");
-			setMemoList(result.data);
-			setLoading(false);
-		} catch (error) {
+		const editData = { ...body, user_id: user.sub };
+		await supabase.from("note").update(editData).eq("id", id);
+		const { data, error } = await supabase.from("note").select("*");
+		setMemoList(data);
+		setLoading(false);
+		if (error) {
 			authErrorNavigate();
 		}
 	}, []);

@@ -3,7 +3,7 @@ import { Head } from "../components/templates/Head";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
 import { memoListState } from "../globalState/memo/memoListState";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { MemoList } from "../components/organism/MemoList";
 import { Calendar } from "../components/organism/Calendar";
@@ -15,6 +15,9 @@ const Index = ({ user, note }) => {
 	console.log(user);
 	const setMemos = useSetRecoilState(memoListState);
 	const setUser = useSetRecoilState(userState);
+	const memos = useRecoilValue(memoListState);
+	console.log(memos);
+
 	const { setApiData } = useDragDropData();
 	console.log(note);
 	useEffect(() => {
