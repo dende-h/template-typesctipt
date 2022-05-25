@@ -4,6 +4,7 @@ import { memo } from "react";
 import { DragDropContext, DropResult, ResponderProvided } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import { completedFlag } from "../../globalState/board/completedFlag";
+import { startedFlag } from "../../globalState/board/startedFlag";
 
 //srcインポート
 import { useDragDropData } from "../../hooks/useDragDropData";
@@ -20,8 +21,10 @@ export const TodoBoard = memo(() => {
 	const { editMarkDiv, loading } = useMemoApi();
 	const { modalOpenAndClose, onClose, isOpen } = useModalOpen();
 	const [isCompleted, setIsCompleted] = useRecoilState<boolean>(completedFlag);
-	const inProgressImage = `url(${process.env.PUBLIC_URL}/inProgressImage.jpg)`;
-	const completedImage = `url(${process.env.PUBLIC_URL}/completedImage.jpg)`;
+	const [isStarted, setIsStarted] = useRecoilState<boolean>(startedFlag);
+	const beforeStartTodo = "/4009601940-pet-882446_1920-O7DQ-320x213-MM-100.jpg";
+	const inProgressImage = "/inProgressImage.jpg";
+	const completedImage = "/completedImage.jpg";
 
 	const columnIds = todoList.dropZoneOrder;
 
@@ -91,8 +94,10 @@ export const TodoBoard = memo(() => {
 			setTodoList(newState);
 			if (finish.id === "column-1") {
 				changeMarkDiv(draggableId, 0);
+				modalOpenAndClose(1800);
 			}
 			if (finish.id === "column-2") {
+				setIsStarted(true);
 				changeMarkDiv(draggableId, 1);
 				modalOpenAndClose(1800);
 			}
@@ -110,9 +115,13 @@ export const TodoBoard = memo(() => {
 					<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={completedImage}>
 						Completed! Good job!!
 					</ModalTodoProgress>
-				) : (
+				) : isStarted ? (
 					<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={inProgressImage}>
 						Todo started! Good luck!!
+					</ModalTodoProgress>
+				) : (
+					<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={beforeStartTodo}>
+						Let the TODO begin!
 					</ModalTodoProgress>
 				)}
 				<DragDropContext onDragEnd={onDragEnd}>

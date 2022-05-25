@@ -1,4 +1,5 @@
-import { Box, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import { Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import Image from "next/image";
 import { ReactNode, VFC } from "react";
 
 type Props = {
@@ -20,7 +21,7 @@ export const ModalTodoProgress: VFC<Props> = (props: Props) => {
 						{children}
 					</ModalHeader>
 					<ModalBody>
-						<Box w={"320px"} h={"213px"} bgImage={modalImage} backgroundSize={"cover"}></Box>
+						<Image width={"320px"} height={"213px"} src={modalImage} />
 					</ModalBody>
 				</ModalContent>
 			</Modal>
