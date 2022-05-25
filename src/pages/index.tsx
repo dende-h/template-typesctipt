@@ -12,14 +12,11 @@ import { useEffect } from "react";
 import { userState } from "../globalState/user/userState";
 
 const Index = ({ user, note }) => {
-	console.log(user);
 	const setMemos = useSetRecoilState(memoListState);
 	const setUser = useSetRecoilState(userState);
-	const memos = useRecoilValue(memoListState);
-	console.log(memos);
 
 	const { setApiData } = useDragDropData();
-	console.log(note);
+
 	useEffect(() => {
 		if (note) {
 			setMemos(note);
@@ -29,20 +26,6 @@ const Index = ({ user, note }) => {
 	useEffect(() => {
 		setUser(user);
 	}, []);
-
-	// const category = "memo";
-	// const date = "2022/3/21";
-	// const description = "kaimono";
-	// const title = "oniyama";
-
-	// const post = async () => {
-	// 	const { data, error } = await supabase
-	// 		.from("note")
-	// 		.insert({ title, date, description, category, user_id: user.sub });
-	// 	if (error) {
-	// 		console.log(error);
-	// 	}
-	// };
 
 	return (
 		<>

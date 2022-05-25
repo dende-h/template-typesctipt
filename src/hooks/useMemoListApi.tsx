@@ -42,20 +42,17 @@ export const useMemoApi = () => {
 	const inputMemoList = useCallback(async (body: body) => {
 		setLoading(true);
 		const insertData = { ...body, user_id: user.sub };
-		console.log(insertData);
-		const { data, error } = await supabase.from("note").insert(insertData);
-		console.log(data);
+		const { error } = await supabase.from("note").insert(insertData);
 		fetchMemoList();
 		if (error) {
-			console.log(error);
+			authErrorNavigate();
 		}
 	}, []);
 
 	const editMemoList = useCallback(async (id: string | undefined, body: body) => {
 		setLoading(true);
 		const editData = { ...body, user_id: user.sub };
-		const { data, error } = await supabase.from("note").update(editData).eq("id", id);
-		console.log(data);
+		const { error } = await supabase.from("note").update(editData).eq("id", id);
 		fetchMemoList();
 		if (error) {
 			authErrorNavigate();
@@ -64,8 +61,7 @@ export const useMemoApi = () => {
 
 	const deleteMemoList = useCallback(async (id: string | undefined) => {
 		setLoading(true);
-		const { data, error } = await supabase.from("note").delete().eq("id", id);
-		console.log(data);
+		const { error } = await supabase.from("note").delete().eq("id", id);
 		fetchMemoList();
 		if (error) {
 			authErrorNavigate();
