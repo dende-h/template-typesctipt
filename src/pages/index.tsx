@@ -10,10 +10,13 @@ import { Calendar } from "../components/organism/Calendar";
 import { useDragDropData } from "../hooks/useDragDropData";
 import { useEffect } from "react";
 import { userState } from "../globalState/user/userState";
+import { isShowTodo } from "../globalState/board/isShowTodo";
+import { TodoBoard } from "../components/organism/TodoBoard";
 
 const Index = ({ user, note }) => {
 	const setMemos = useSetRecoilState(memoListState);
 	const setUser = useSetRecoilState(userState);
+	const isShowTodoBoard = useRecoilValue(isShowTodo);
 
 	const { setApiData } = useDragDropData();
 
@@ -35,7 +38,7 @@ const Index = ({ user, note }) => {
 			</Head>
 			<Flex>
 				<MemoList />
-				<Calendar />
+				{isShowTodoBoard ? <TodoBoard /> : <Calendar />}
 			</Flex>
 		</>
 	);

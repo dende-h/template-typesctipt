@@ -55,7 +55,6 @@ export const useDragDropData = () => {
 			},
 			dropZoneOrder: ["column-1", "column-2", "column-3"]
 		};
-		console.log(todoDragDropObject);
 		setTodoList(todoDragDropObject);
 	}, []);
 

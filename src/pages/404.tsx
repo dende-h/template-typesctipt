@@ -13,8 +13,8 @@ const Custom404 = memo(() => {
 				<title>404Page -Note me</title>
 			</Head>
 			<Box
-				backgroundImage={`url(/Na_June_67.jpg)`}
-				backgroundPosition="bottom"
+				backgroundImage={`/Na_June_67.jpg`}
+				backgroundPosition="top"
 				backgroundSize="cover"
 				textAlign={"center"}
 				w="100%"

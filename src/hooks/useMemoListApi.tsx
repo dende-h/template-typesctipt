@@ -5,25 +5,21 @@ import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuthenticated } from "../globalState/isAuthenticated";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { memoListState } from "../globalState/memo/memoListState";
 import { userState } from "../globalState/user/userState";
-import { memoApi } from "../libs/api";
 import { FetchMemoList } from "../types/FetchMemoList";
 import { getSupabase } from "../utils/supabase";
 
 type body = Omit<FetchMemoList, "id">;
 
 export const useMemoApi = () => {
-	const setIsAuth = useSetRecoilState(isAuthenticated);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [memoList, setMemoList] = useRecoilState<Array<FetchMemoList>>(memoListState);
 	const user = useRecoilValue(userState);
 	const supabase = getSupabase(user.accessToken);
 	const router = useRouter();
 	const authErrorNavigate = useCallback(() => {
-		setIsAuth(false);
 		toast.error("ログアウトされました。再度ログインしてください");
 		router.push("/api/auth/logout");
 	}, []);
