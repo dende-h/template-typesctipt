@@ -4,7 +4,6 @@ import theme from "../theme";
 import { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
 import { Toaster } from "react-hot-toast";
-import HeaderLayout from "../components/templates/HeaderLayout";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -12,9 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<RecoilRoot>
 				<Toaster position="top-center" reverseOrder={false} />
 				<UserProvider>
-					<HeaderLayout>
-						<Component {...pageProps} />
-					</HeaderLayout>
+					<Component {...pageProps} />
 				</UserProvider>
 			</RecoilRoot>
 		</ChakraProvider>

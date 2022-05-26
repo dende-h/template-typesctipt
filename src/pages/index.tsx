@@ -4,7 +4,7 @@ import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
 import { memoListState } from "../globalState/memo/memoListState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-
+import HeaderLayout from "../components/templates/HeaderLayout";
 import { MemoList } from "../components/organism/MemoList";
 import { Calendar } from "../components/organism/Calendar";
 import { useDragDropData } from "../hooks/useDragDropData";
@@ -32,14 +32,16 @@ const Index = ({ user, note }) => {
 
 	return (
 		<>
-			<Head>
-				<meta charSet="utf-8" />
-				<title>TopPage -Note me</title>
-			</Head>
-			<Flex>
-				<MemoList />
-				{isShowTodoBoard ? <TodoBoard /> : <Calendar />}
-			</Flex>
+			<HeaderLayout>
+				<Head>
+					<meta charSet="utf-8" />
+					<title>TopPage -Note me</title>
+				</Head>
+				<Flex>
+					<MemoList />
+					{isShowTodoBoard ? <TodoBoard /> : <Calendar />}
+				</Flex>
+			</HeaderLayout>
 		</>
 	);
 };
