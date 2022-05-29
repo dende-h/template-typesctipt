@@ -25,6 +25,9 @@ export const TodoBoard = memo(() => {
 	const beforeStartTodo = "/4009601940-pet-882446_1920-O7DQ-320x213-MM-100.jpg";
 	const inProgressImage = "/inProgressImage.jpg";
 	const completedImage = "/completedImage.jpg";
+	const todoColumnNo = 0;
+	const inProgressColumnNo = 1;
+	const CompletedColumnNo = 2;
 
 	const columnIds = todoList.dropZoneOrder;
 
@@ -93,17 +96,17 @@ export const TodoBoard = memo(() => {
 			};
 			setTodoList(newState);
 			if (finish.id === "column-1") {
-				changeMarkDiv(draggableId, 0);
+				changeMarkDiv(draggableId, todoColumnNo);
 				modalOpenAndClose(1800);
 			}
 			if (finish.id === "column-2") {
 				setIsStarted(true);
-				changeMarkDiv(draggableId, 1);
+				changeMarkDiv(draggableId, inProgressColumnNo);
 				modalOpenAndClose(1800);
 			}
 			if (finish.id === "column-3") {
 				setIsCompleted(true);
-				changeMarkDiv(draggableId, 2);
+				changeMarkDiv(draggableId, CompletedColumnNo);
 				modalOpenAndClose(1800);
 			}
 		}
