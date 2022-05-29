@@ -4,15 +4,15 @@ import { memo, useEffect, VFC } from "react";
 import toast from "react-hot-toast";
 import { useUser } from "@auth0/nextjs-auth0";
 import { PrimaryButton } from "../atoms/PrimaryButton";
+import { useRouter } from "next/router";
 
 export const AppIntroduction: VFC = memo(() => {
 	const introductionTexts = ["ちょっとしたメモ", "予定のカレンダー", "TODOリスト"];
-	const onClickRegisterButton = () => {
-		toast.error("新規登録は未実装です");
-	};
+	const router = useRouter();
+
 	return (
 		<Box
-			backgroundImage={`url(/KAZ829001.jpg)`}
+			backgroundImage="/KAZ829001.jpg"
 			backgroundSize={["cover"]}
 			w={"70%"}
 			h={"800px"}
@@ -39,11 +39,13 @@ export const AppIntroduction: VFC = memo(() => {
 					全てまとめてシンプルに管理する
 				</Text>
 				<Box p={6}>
-					<PrimaryButton bgColor="teal.400" size="lg" onClick={onClickRegisterButton}>
-						新規アカウント登録
+					<PrimaryButton bgColor="teal.400" size="lg" _hover={{ opacity: 0.6 }}>
+						<Link href={"/api/auth/signup"}>
+							<a>新規アカウント登録</a>
+						</Link>
 					</PrimaryButton>
 				</Box>
-				<Link href={"/Login"}>
+				<Link href={"/"}>
 					<Text
 						as={"a"}
 						fontSize={"20px"}
