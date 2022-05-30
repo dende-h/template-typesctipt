@@ -1,6 +1,6 @@
 import { Checkbox } from "@chakra-ui/react";
 import { memo, VFC } from "react";
-import { CheckBoxProps } from "../../types/PropsTypes";
+import { CheckBoxProps } from "../../types/propsTypes";
 
 type Props = CheckBoxProps;
 

@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import { memo, VFC } from "react";
-import { PrimaryButtonProps } from "../../types/PropsTypes";
+import { PrimaryButtonProps } from "../../types/propsTypes";
 
 type Props = PrimaryButtonProps;
 

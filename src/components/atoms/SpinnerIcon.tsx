@@ -1,6 +1,6 @@
 import { Spinner } from "@chakra-ui/react";
 import { memo, VFC } from "react";
-import { SpinnerPropsType } from "../../types/PropsTypes";
+import { SpinnerPropsType } from "../../types/propsTypes";
 
 type Props = SpinnerPropsType;
 

@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { useRecoilState } from "recoil";
 import { todoDragDropObjectState } from "../globalState/board/todoDragDropObjectState";
-import { DragDropObjectType } from "../types/DragDropObjectType";
-import { FetchMemoList } from "../types/FetchMemoList";
+import { DragDropObjectType } from "../types/dragDropObjectType";
+import { FetchMemoList } from "../types/fetchMemoList";
 
 type DragDropObject = DragDropObjectType;
 

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { memoListState } from "../globalState/memo/memoListState";
 import { userState } from "../globalState/user/userState";
-import { FetchMemoList } from "../types/FetchMemoList";
+import { FetchMemoList } from "../types/fetchMemoList";
 import { getSupabase } from "../utils/supabase";
 
 type body = Omit<FetchMemoList, "id">;

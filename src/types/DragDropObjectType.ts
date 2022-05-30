@@ -1,4 +1,4 @@
-import { FetchMemoList } from "./FetchMemoList";
+import { FetchMemoList } from "./fetchMemoList";
 
 export type DragDropObjectType = {
 	dragItem: {
