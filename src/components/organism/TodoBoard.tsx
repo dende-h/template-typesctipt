@@ -94,17 +94,17 @@ export const TodoBoard = memo(() => {
 			};
 			setTodoList(newState);
 			if (finish.id === "column-1") {
-				changeMarkDiv(draggableId, todoColumnNumber);
+				changeMarkDiv(draggableId, columnNumbers.todo);
 				modalOpenAndClose(1800);
 			}
 			if (finish.id === "column-2") {
 				setIsStarted(true);
-				changeMarkDiv(draggableId, inProgressColumnNumber);
+				changeMarkDiv(draggableId, columnNumbers.inProgress);
 				modalOpenAndClose(1800);
 			}
 			if (finish.id === "column-3") {
 				setIsCompleted(true);
-				changeMarkDiv(draggableId, CompletedColumnNumber);
+				changeMarkDiv(draggableId, columnNumbers.completed);
 				modalOpenAndClose(1800);
 			}
 		}

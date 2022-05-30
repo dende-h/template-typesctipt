@@ -8,13 +8,13 @@ export const useModalOpen = () => {
 	const { onOpen, onClose, isOpen } = useDisclosure();
 	const setIsCompleted = useSetRecoilState(completedFlag);
 	const setIsStarted = useSetRecoilState(startedFlag);
-	const modalOpenAndClose: (TimeToClose: number) => void = useCallback((TimeToClose) => {
+	const modalOpenAndClose: (TimeToClose: number) => void = useCallback((timeToClose) => {
 		onOpen();
 		setTimeout(() => {
 			onClose();
 			setIsCompleted(false);
 			setIsStarted(false);
-		}, TimeToClose);
+		}, timeToClose);
 	}, []);
 	const modalOpen: () => void = useCallback(() => {
 		onOpen();
