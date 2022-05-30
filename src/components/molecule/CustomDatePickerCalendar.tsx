@@ -40,13 +40,7 @@ export const CustomDatePickerCalendar: VFC<Props> = memo((props: Props) => {
 				prevMonthButtonDisabled,
 				nextMonthButtonDisabled
 			}) => (
-				<chakra.div
-					style={{
-						margin: 10,
-						display: "flex",
-						justifyContent: "center"
-					}}
-				>
+				<chakra.div m="10" display="flex" justifyContent="center">
 					<chakra.button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
 						前の月へ
 					</chakra.button>
