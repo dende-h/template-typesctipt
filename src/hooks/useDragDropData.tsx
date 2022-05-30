@@ -8,25 +8,26 @@ type DragDropObject = DragDropObjectType;
 
 export const useDragDropData = () => {
 	const [todoList, setTodoList] = useRecoilState(todoDragDropObjectState);
+	const columnNumbers = { todo: 0, inProgress: 1, completed: 2 };
 	const setApiData = useCallback((initialMemoData: FetchMemoList[]) => {
 		const categoryIsTodoList = initialMemoData.filter((item) => {
 			return item.category === "TODO";
 		});
 		const colmun1DragItems = categoryIsTodoList.filter((item) => {
-			return item.mark_div === 0;
+			return item.mark_div === columnNumbers.todo;
 		});
 		const todoDragItemIds = colmun1DragItems.map((item) => {
 			return item.id;
 		});
 
 		const colmun2DragItems = categoryIsTodoList.filter((item) => {
-			return item.mark_div === 1;
+			return item.mark_div === columnNumbers.inProgress;
 		});
 		const inProgressDragItemIds = colmun2DragItems.map((item) => {
 			return item.id;
 		});
 		const colmun3DragItems = categoryIsTodoList.filter((item) => {
-			return item.mark_div === 2;
+			return item.mark_div === columnNumbers.completed;
 		});
 		const completedDragItemIds = colmun3DragItems.map((item) => {
 			return item.id;
