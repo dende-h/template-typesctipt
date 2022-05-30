@@ -13,7 +13,7 @@ import {
 import { memo, useState, VFC } from "react";
 import toast from "react-hot-toast";
 import { BsFillShareFill, BsStar } from "react-icons/bs";
-import { FetchMemoList } from "../../types/FetchMemoList";
+import { FetchMemoList } from "../../types/fetchMemoList";
 import { ModalEditor } from "./ModalEditor";
 import { ModalValidate } from "./ModalValidate";
 

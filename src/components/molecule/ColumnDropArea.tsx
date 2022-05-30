@@ -1,7 +1,7 @@
 import { Box, Text, Divider, Stack } from "@chakra-ui/react";
 import { memo, VFC } from "react";
 import { Droppable } from "react-beautiful-dnd";
-import { FetchMemoList } from "../../types/FetchMemoList";
+import { FetchMemoList } from "../../types/fetchMemoList";
 import { TodoLabel } from "./TodoLabel";
 
 type Props = {

@@ -1,4 +1,4 @@
-export type user = {
+export type User = {
 	accessToken: string;
 	email?: string;
 	email_verified?: boolean;

@@ -5,7 +5,7 @@ import { categoryIsScheduleSelector } from "../../globalState/category/categoryI
 import { categoryIsTodoSelector } from "../../globalState/category/categoryIsTodoSelector";
 import { tabIndexState } from "../../globalState/category/tabIndexState";
 import { memoListState } from "../../globalState/memo/memoListState";
-import { FetchMemoList } from "../../types/FetchMemoList";
+import { FetchMemoList } from "../../types/fetchMemoList";
 import { OneMemo } from "../molecule/OneMemo";
 
 export const MemoListHandle: VFC = memo(() => {

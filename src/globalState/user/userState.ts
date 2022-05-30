@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { user } from "../../types/user";
+import { User } from "../../types/user";
 
-const initialUserState: user = {
+const initialUserState: User = {
 	accessToken: ""
 };
 export const userState = atom({

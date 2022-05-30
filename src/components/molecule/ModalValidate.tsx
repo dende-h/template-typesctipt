@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { memo, VFC } from "react";
 import { useMemoApi } from "../../hooks/useMemoListApi";
-import { FetchMemoList } from "../../types/FetchMemoList";
+import { FetchMemoList } from "../../types/fetchMemoList";
 
 type Props = {
 	deleteMemo: FetchMemoList;

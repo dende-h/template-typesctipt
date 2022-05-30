@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { FetchMemoList } from "../../types/FetchMemoList";
+import { FetchMemoList } from "../../types/fetchMemoList";
 
 const initialMemoListState: Array<FetchMemoList> = [];
 

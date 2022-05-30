@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { memo, VFC } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { FetchMemoList } from "../../types/FetchMemoList";
+import { FetchMemoList } from "../../types/fetchMemoList";
 
 type Props = {
 	todo: FetchMemoList | undefined;

@@ -10,7 +10,7 @@ import { startedFlag } from "../../globalState/board/startedFlag";
 import { useDragDropData } from "../../hooks/useDragDropData";
 import { useMemoApi } from "../../hooks/useMemoListApi";
 import { useModalOpen } from "../../hooks/useModalOpen";
-import { bodyType } from "../../types/bodyType";
+import { BodyType } from "../../types/bodyType";
 import { ColumnDropArea } from "../molecule/ColumnDropArea";
 import { ModalTodoProgress } from "../molecule/ModalTodoProgress";
 
@@ -31,7 +31,7 @@ export const TodoBoard = memo(() => {
 
 	const changeMarkDiv = async (draggableId: string, markDivNumber: number) => {
 		const droppedItem = todoList.dragItem[draggableId];
-		const editMark: bodyType = { ...droppedItem, mark_div: markDivNumber };
+		const editMark: BodyType = { ...droppedItem, mark_div: markDivNumber };
 		delete editMark.id;
 		editMarkDiv(droppedItem.id, editMark);
 	};

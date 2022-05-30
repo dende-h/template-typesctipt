@@ -1,7 +1,7 @@
 import { Box, Divider, Flex, Skeleton, Spacer, Stack } from "@chakra-ui/react";
 import { memo, useEffect, VFC } from "react";
 import { useMemoApi } from "../../hooks/useMemoListApi";
-import { FetchMemoList } from "../../types/FetchMemoList";
+import { FetchMemoList } from "../../types/fetchMemoList";
 import { memoListState } from "../../globalState/memo/memoListState";
 import { useSetRecoilState } from "recoil";
 import { ModalInput } from "../molecule/ModalInput";

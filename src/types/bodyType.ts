@@ -1,4 +1,4 @@
-export type bodyType = {
+export type BodyType = {
 	id?: string;
 	title: string;
 	category: string;

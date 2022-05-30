@@ -22,8 +22,8 @@ import { dateState } from "../../globalState/date/dateState";
 import { useInputForm } from "../../hooks/useInputForm";
 import { useMemoApi } from "../../hooks/useMemoListApi";
 import { useTextArea } from "../../hooks/useTextArea";
-import { FetchMemoList } from "../../types/FetchMemoList";
-import { bodyType } from "../../types/bodyType";
+import { FetchMemoList } from "../../types/fetchMemoList";
+import { BodyType } from "../../types/bodyType";
 import { CustomDatePickerCalendar } from "./CustomDatePickerCalendar";
 import { RadioCategory } from "./RadioCategory";
 import { EditIcon } from "@chakra-ui/icons";
@@ -32,7 +32,7 @@ type Props = {
 	editMemo: FetchMemoList;
 };
 
-type body = bodyType;
+type body = BodyType;
 export const ModalEditor: VFC<Props> = memo((props: Props) => {
 	const { editMemo } = props;
 	const { title, description, category, date } = editMemo;

@@ -1,6 +1,6 @@
 import { VFC } from "react";
 import { Helmet } from "react-helmet";
-import { ChildrenProps } from "../../types/ChildrenProps";
+import { ChildrenProps } from "../../types/childrenProps";
 
 type Props = ChildrenProps;
 
