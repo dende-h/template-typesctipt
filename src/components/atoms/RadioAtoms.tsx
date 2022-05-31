@@ -6,9 +6,5 @@ type Props = RadioAtomsProps;
 
 export const RadioAtoms: VFC<Props> = memo((props: Props) => {
 	const { children, value } = props;
-	return (
-		<>
-			<Radio value={value}>{children}</Radio>
-		</>
-	);
+	return <Radio value={value}>{children}</Radio>;
 });
