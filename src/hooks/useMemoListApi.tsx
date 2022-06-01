@@ -9,14 +9,15 @@ import { userState } from "../globalState/user/userState";
 import { FetchMemoList } from "../types/fetchMemoList";
 import { User } from "../types/user";
 import { getSupabase } from "../utils/supabase";
+import { useDragDropData } from "./useDragDropData";
 
 type body = Omit<FetchMemoList, "id">;
 
 export const useMemoApi = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [memoList, setMemoList] = useRecoilState<Array<FetchMemoList>>(memoListState);
+	const { setApiData } = useDragDropData();
 	const user = useRecoilValue<User>(userState);
-	const userProfile = useUser();
 	const supabase = getSupabase(user.accessToken);
 	const router = useRouter();
 
@@ -27,9 +28,9 @@ export const useMemoApi = () => {
 
 	const fetchMemoList = useCallback(async () => {
 		setLoading(true);
-
 		const { data, error } = await supabase.from("note").select("*").order("created_at", { ascending: true });
 		setMemoList(data);
+		setApiData(data);
 		setLoading(false);
 		if (error) {
 			authErrorNavigate();
@@ -38,13 +39,11 @@ export const useMemoApi = () => {
 
 	const inputMemoList = useCallback(async (body: body) => {
 		setLoading(true);
-		console.log(user);
-		const insertData = { ...body, user_id: userProfile.user.sub };
-		console.log(insertData);
+		const insertData = { ...body, user_id: user.sub };
 		const { error } = await supabase.from("note").insert(insertData);
 		fetchMemoList();
 		if (error) {
-			console.log(error);
+			authErrorNavigate();
 		}
 	}, []);
 

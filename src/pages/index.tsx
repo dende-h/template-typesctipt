@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import { Head } from "../components/templates/Head";
-import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { getSession, useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
 import { memoListState } from "../globalState/memo/memoListState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -13,11 +13,11 @@ import { userState } from "../globalState/user/userState";
 import { isShowTodo } from "../globalState/board/isShowTodo";
 import { TodoBoard } from "../components/organism/TodoBoard";
 
-const Index = ({ user, note }) => {
+const Index = ({ note }) => {
 	const setMemos = useSetRecoilState(memoListState);
 	const setUser = useSetRecoilState(userState);
 	const isShowTodoBoard = useRecoilValue(isShowTodo);
-	console.log(user);
+	const userProfile = useUser();
 
 	const { setApiData } = useDragDropData();
 
@@ -28,7 +28,7 @@ const Index = ({ user, note }) => {
 		}
 	}, []);
 	useEffect(() => {
-		setUser({ accessToken: user.accessToKen, name: user.name, nickname: user.nickname });
+		setUser({ ...userProfile.user });
 	}, []);
 
 	return (
