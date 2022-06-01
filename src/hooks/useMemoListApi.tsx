@@ -1,6 +1,4 @@
-import { PostgrestResponse } from "@supabase/supabase-js";
-import { AxiosResponse } from "axios";
-import { addWeeks } from "date-fns";
+import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
@@ -9,6 +7,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { memoListState } from "../globalState/memo/memoListState";
 import { userState } from "../globalState/user/userState";
 import { FetchMemoList } from "../types/fetchMemoList";
+import { User } from "../types/user";
 import { getSupabase } from "../utils/supabase";
 
 type body = Omit<FetchMemoList, "id">;
@@ -16,9 +15,11 @@ type body = Omit<FetchMemoList, "id">;
 export const useMemoApi = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [memoList, setMemoList] = useRecoilState<Array<FetchMemoList>>(memoListState);
-	const user = useRecoilValue(userState);
+	const user = useRecoilValue<User>(userState);
+	const userProfile = useUser();
 	const supabase = getSupabase(user.accessToken);
 	const router = useRouter();
+
 	const authErrorNavigate = useCallback(() => {
 		toast.error("ログアウトされました。再度ログインしてください");
 		router.push("/api/auth/logout");
@@ -27,7 +28,7 @@ export const useMemoApi = () => {
 	const fetchMemoList = useCallback(async () => {
 		setLoading(true);
 
-		const { data, error } = await supabase.from("note").select("*");
+		const { data, error } = await supabase.from("note").select("*").order("created_at", { ascending: true });
 		setMemoList(data);
 		setLoading(false);
 		if (error) {
@@ -37,11 +38,13 @@ export const useMemoApi = () => {
 
 	const inputMemoList = useCallback(async (body: body) => {
 		setLoading(true);
-		const insertData = { ...body, user_id: user.sub };
+		console.log(user);
+		const insertData = { ...body, user_id: userProfile.user.sub };
+		console.log(insertData);
 		const { error } = await supabase.from("note").insert(insertData);
 		fetchMemoList();
 		if (error) {
-			authErrorNavigate();
+			console.log(error);
 		}
 	}, []);
 
@@ -68,7 +71,7 @@ export const useMemoApi = () => {
 		setLoading(true);
 		const editData = { ...body, user_id: user.sub };
 		await supabase.from("note").update(editData).eq("id", id);
-		const { data, error } = await supabase.from("note").select("*");
+		const { data, error } = await supabase.from("note").select("*").order("created_at", { ascending: true });
 		setMemoList(data);
 		setLoading(false);
 		if (error) {

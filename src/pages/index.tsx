@@ -17,17 +17,18 @@ const Index = ({ user, note }) => {
 	const setMemos = useSetRecoilState(memoListState);
 	const setUser = useSetRecoilState(userState);
 	const isShowTodoBoard = useRecoilValue(isShowTodo);
+	console.log(user);
 
 	const { setApiData } = useDragDropData();
 
 	useEffect(() => {
 		if (note) {
-			setMemos(note);
-			setApiData(note);
+			setMemos([...note]);
+			setApiData([...note]);
 		}
 	}, []);
 	useEffect(() => {
-		setUser(user);
+		setUser({ accessToken: user.accessToKen, name: user.name, nickname: user.nickname });
 	}, []);
 
 	return (
@@ -54,7 +55,7 @@ export const getServerSideProps = withPageAuthRequired({
 
 		const supabase = getSupabase(accessToken);
 
-		const { data: note } = await supabase.from("note").select("*");
+		const { data: note } = await supabase.from("note").select("*").order("created_at", { ascending: true });
 
 		return {
 			props: { note }

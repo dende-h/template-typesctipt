@@ -28,7 +28,7 @@ export const CustomDatePickerCalendar: VFC<Props> = memo((props: Props) => {
 		dateValueSet(date);
 	};
 	const years = _.range(2020, getYear(new Date()) + 1, 1);
-	const months = datePickerMonthArray;
+
 	return (
 		<DatePicker
 			renderCustomHeader={({
@@ -54,10 +54,10 @@ export const CustomDatePickerCalendar: VFC<Props> = memo((props: Props) => {
 						})}
 					</chakra.select>
 					<chakra.select
-						value={months[getMonth(date)]}
-						onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
+						value={datePickerMonthArray[getMonth(date)]}
+						onChange={({ target: { value } }) => changeMonth(datePickerMonthArray.indexOf(value))}
 					>
-						{months.map((option) => (
+						{datePickerMonthArray.map((option) => (
 							<chakra.option key={option} value={option}>
 								{option}
 							</chakra.option>

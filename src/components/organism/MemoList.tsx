@@ -1,12 +1,7 @@
-import { Box, Divider, Flex, Skeleton, Spacer, Stack } from "@chakra-ui/react";
-import { memo, useEffect, VFC } from "react";
-import { useMemoApi } from "../../hooks/useMemoListApi";
-import { FetchMemoList } from "../../types/fetchMemoList";
-import { memoListState } from "../../globalState/memo/memoListState";
-import { useSetRecoilState } from "recoil";
+import { Box, Divider, Flex, Spacer, Stack } from "@chakra-ui/react";
+import { memo, VFC } from "react";
 import { ModalInput } from "../molecule/ModalInput";
 import { CategoryTab } from "../templates/CategoryTab";
-import { useDragDropData } from "../../hooks/useDragDropData";
 import { MemoListHandle } from "./MemoListHandle";
 
 export const MemoList: VFC = memo(() => {
