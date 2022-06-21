@@ -12,6 +12,8 @@ import {
 	useDisclosure
 } from "@chakra-ui/react";
 import { memo, VFC } from "react";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../globalState/user/userState";
 import { useMemoApi } from "../../hooks/useMemoListApi";
 import { FetchMemoList } from "../../types/fetchMemoList";
 
@@ -22,7 +24,8 @@ type Props = {
 export const ModalValidate: VFC<Props> = memo((props: Props) => {
 	const { deleteMemo } = props;
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const { deleteMemoList, loading } = useMemoApi();
+	const user = useRecoilValue(userState);
+	const { deleteMemoList, loading } = useMemoApi(user);
 	const onClickDeleteButton = () => {
 		deleteMemoList(deleteMemo.id);
 	};

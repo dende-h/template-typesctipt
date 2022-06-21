@@ -9,8 +9,13 @@ const { persistAtom } = recoilPersist({
 
 const initialUserState: User = {
 	accessToken: "",
+	email: "",
+	email_verified: false,
 	name: "",
-	nickname: ""
+	nickname: "",
+	picture: "",
+	sub: "",
+	updated_at: ""
 };
 export const userState = atom({
 	key: "userState",

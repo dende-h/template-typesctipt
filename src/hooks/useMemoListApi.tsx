@@ -1,4 +1,3 @@
-import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
@@ -12,10 +11,9 @@ import { getSupabase } from "../utils/supabase";
 
 type body = Omit<FetchMemoList, "id">;
 
-export const useMemoApi = () => {
+export const useMemoApi = (user: User) => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [memoList, setMemoList] = useRecoilState<Array<FetchMemoList>>(memoListState);
-	const user = useRecoilValue<User>(userState);
 	const supabase = getSupabase(user.accessToken);
 	const router = useRouter();
 
@@ -40,7 +38,8 @@ export const useMemoApi = () => {
 		const { error } = await supabase.from("note").insert(insertData);
 		fetchMemoList();
 		if (error) {
-			authErrorNavigate();
+			console.log(user.accessToken);
+			console.log(user.sub);
 		}
 	}, []);
 

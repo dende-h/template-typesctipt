@@ -1,29 +1,26 @@
 //ライブラリインポート
 import { Box, HStack } from "@chakra-ui/react";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { DragDropContext, DropResult, ResponderProvided } from "react-beautiful-dnd";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { completedFlag } from "../../globalState/board/completedFlag";
-import { dragDropDataSelector } from "../../globalState/board/dragDropDataSelector";
 import { startedFlag } from "../../globalState/board/startedFlag";
-import { memoListState } from "../../globalState/memo/memoListState";
+import { userState } from "../../globalState/user/userState";
 
 //srcインポート
 import { useDragDropData } from "../../hooks/useDragDropData";
 import { useMemoApi } from "../../hooks/useMemoListApi";
 import { useModalOpen } from "../../hooks/useModalOpen";
 import { BodyType } from "../../types/bodyType";
-import { FetchMemoList } from "../../types/fetchMemoList";
 import { ColumnDropArea } from "../molecule/ColumnDropArea";
 import { ModalTodoProgress } from "../molecule/ModalTodoProgress";
 
 type onDragEnd = (result: DropResult, provided: ResponderProvided) => void;
-type Props = { memoList: FetchMemoList[] };
 
-export const TodoBoard = memo((props: Props) => {
-	const { memoList } = props;
-	const { todoList, setTodoList, columnNumbers } = useDragDropData(memoList);
-	const { editMarkDiv, loading } = useMemoApi();
+export const TodoBoard = memo(() => {
+	const { todoList, setTodoList, columnNumbers } = useDragDropData();
+	const user = useRecoilValue(userState);
+	const { editMarkDiv, loading } = useMemoApi(user);
 	const { modalOpenAndClose, onClose, isOpen } = useModalOpen();
 	const [isCompleted, setIsCompleted] = useRecoilState<boolean>(completedFlag);
 	const [isStarted, setIsStarted] = useRecoilState<boolean>(startedFlag);

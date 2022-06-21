@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Head } from "../components/templates/Head";
-import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { getSession, useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
 import { memoListState } from "../globalState/memo/memoListState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -24,9 +24,13 @@ const Index = ({ user, note }) => {
 			setIsFetched(true);
 		}
 	}, []);
+
 	useEffect(() => {
-		setUser(user);
-	}, []);
+		if (isFetched) {
+			setUser(user);
+			console.log(user);
+		}
+	}, [isFetched]);
 
 	return (
 		<>
@@ -38,7 +42,7 @@ const Index = ({ user, note }) => {
 				{isFetched ? (
 					<Flex>
 						<MemoList />
-						{isShowTodoBoard ? <TodoBoard memoList={note} /> : <Calendar />}
+						{isShowTodoBoard ? <TodoBoard /> : <Calendar />}
 					</Flex>
 				) : (
 					<Box>...Loading</Box>
