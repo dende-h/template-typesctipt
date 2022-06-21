@@ -1,23 +1,28 @@
 //ライブラリインポート
 import { Box, HStack } from "@chakra-ui/react";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { DragDropContext, DropResult, ResponderProvided } from "react-beautiful-dnd";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { completedFlag } from "../../globalState/board/completedFlag";
+import { dragDropDataSelector } from "../../globalState/board/dragDropDataSelector";
 import { startedFlag } from "../../globalState/board/startedFlag";
+import { memoListState } from "../../globalState/memo/memoListState";
 
 //srcインポート
 import { useDragDropData } from "../../hooks/useDragDropData";
 import { useMemoApi } from "../../hooks/useMemoListApi";
 import { useModalOpen } from "../../hooks/useModalOpen";
 import { BodyType } from "../../types/bodyType";
+import { FetchMemoList } from "../../types/fetchMemoList";
 import { ColumnDropArea } from "../molecule/ColumnDropArea";
 import { ModalTodoProgress } from "../molecule/ModalTodoProgress";
 
 type onDragEnd = (result: DropResult, provided: ResponderProvided) => void;
+type Props = { memoList: FetchMemoList[] };
 
-export const TodoBoard = memo(() => {
-	const { todoList, setTodoList } = useDragDropData();
+export const TodoBoard = memo((props: Props) => {
+	const { memoList } = props;
+	const { todoList, setTodoList, columnNumbers } = useDragDropData(memoList);
 	const { editMarkDiv, loading } = useMemoApi();
 	const { modalOpenAndClose, onClose, isOpen } = useModalOpen();
 	const [isCompleted, setIsCompleted] = useRecoilState<boolean>(completedFlag);
@@ -25,8 +30,6 @@ export const TodoBoard = memo(() => {
 	const beforeStartTodo = "/4009601940-pet-882446_1920-O7DQ-320x213-MM-100.jpg";
 	const inProgressImage = "/inProgressImage.jpg";
 	const completedImage = "/completedImage.jpg";
-	const columnNumbers = { todo: 0, inProgress: 1, completed: 2 };
-
 	const columnIds = todoList.dropZoneOrder;
 
 	const changeMarkDiv = async (draggableId: string, markDivNumber: number) => {
@@ -110,43 +113,41 @@ export const TodoBoard = memo(() => {
 		}
 	};
 	return (
-		<>
-			<Box w={"100%"} m={4} overflowX="scroll">
-				{isCompleted ? (
-					<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={completedImage}>
-						Completed! Good job!!
-					</ModalTodoProgress>
-				) : isStarted ? (
-					<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={inProgressImage}>
-						Todo started! Good luck!!
-					</ModalTodoProgress>
-				) : (
-					<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={beforeStartTodo}>
-						Let the TODO begin!
-					</ModalTodoProgress>
-				)}
-				<DragDropContext onDragEnd={onDragEnd}>
-					<HStack spacing={6}>
-						{columnIds.map((columnId) => {
-							const columns = todoList.dropZone[columnId];
-							const todoArray = columns.todoIds.map((todoId) => {
-								if (todoId) {
-									return todoList.dragItem[todoId];
-								}
-							});
-							return (
-								<ColumnDropArea
-									key={columns.id}
-									id={columns.id}
-									title={columns.title}
-									todoArray={todoArray}
-									loading={loading}
-								/>
-							);
-						})}
-					</HStack>
-				</DragDropContext>
-			</Box>
-		</>
+		<Box w={"100%"} m={4} overflowX="scroll">
+			{isCompleted ? (
+				<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={completedImage}>
+					Completed! Good job!!
+				</ModalTodoProgress>
+			) : isStarted ? (
+				<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={inProgressImage}>
+					Todo started! Good luck!!
+				</ModalTodoProgress>
+			) : (
+				<ModalTodoProgress onClose={onClose} isOpen={isOpen} modalImage={beforeStartTodo}>
+					Let the TODO begin!
+				</ModalTodoProgress>
+			)}
+			<DragDropContext onDragEnd={onDragEnd}>
+				<HStack spacing={6}>
+					{columnIds.map((columnId) => {
+						const columns = todoList.dropZone[columnId];
+						const todoArray = columns.todoIds.map((todoId) => {
+							if (todoId) {
+								return todoList.dragItem[todoId];
+							}
+						});
+						return (
+							<ColumnDropArea
+								key={columns.id}
+								id={columns.id}
+								title={columns.title}
+								todoArray={todoArray}
+								loading={loading}
+							/>
+						);
+					})}
+				</HStack>
+			</DragDropContext>
+		</Box>
 	);
 });

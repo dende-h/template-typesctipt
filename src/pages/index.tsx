@@ -1,34 +1,31 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { Head } from "../components/templates/Head";
-import { getSession, useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
 import { memoListState } from "../globalState/memo/memoListState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import HeaderLayout from "../components/templates/HeaderLayout";
 import { MemoList } from "../components/organism/MemoList";
 import { Calendar } from "../components/organism/Calendar";
-import { useDragDropData } from "../hooks/useDragDropData";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { userState } from "../globalState/user/userState";
 import { isShowTodo } from "../globalState/board/isShowTodo";
 import { TodoBoard } from "../components/organism/TodoBoard";
 
-const Index = ({ note }) => {
+const Index = ({ user, note }) => {
+	const [isFetched, setIsFetched] = useState(false);
 	const setMemos = useSetRecoilState(memoListState);
 	const setUser = useSetRecoilState(userState);
 	const isShowTodoBoard = useRecoilValue(isShowTodo);
-	const userProfile = useUser();
-
-	const { setApiData } = useDragDropData();
 
 	useEffect(() => {
 		if (note) {
-			setMemos([...note]);
-			setApiData([...note]);
+			setMemos(note);
+			setIsFetched(true);
 		}
 	}, []);
 	useEffect(() => {
-		setUser({ ...userProfile.user });
+		setUser(user);
 	}, []);
 
 	return (
@@ -38,10 +35,14 @@ const Index = ({ note }) => {
 					<meta charSet="utf-8" />
 					<title>TopPage -Note me</title>
 				</Head>
-				<Flex>
-					<MemoList />
-					{isShowTodoBoard ? <TodoBoard /> : <Calendar />}
-				</Flex>
+				{isFetched ? (
+					<Flex>
+						<MemoList />
+						{isShowTodoBoard ? <TodoBoard memoList={note} /> : <Calendar />}
+					</Flex>
+				) : (
+					<Box>...Loading</Box>
+				)}
 			</HeaderLayout>
 		</>
 	);

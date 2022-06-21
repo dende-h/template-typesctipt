@@ -9,14 +9,12 @@ import { userState } from "../globalState/user/userState";
 import { FetchMemoList } from "../types/fetchMemoList";
 import { User } from "../types/user";
 import { getSupabase } from "../utils/supabase";
-import { useDragDropData } from "./useDragDropData";
 
 type body = Omit<FetchMemoList, "id">;
 
 export const useMemoApi = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [memoList, setMemoList] = useRecoilState<Array<FetchMemoList>>(memoListState);
-	const { setApiData } = useDragDropData();
 	const user = useRecoilValue<User>(userState);
 	const supabase = getSupabase(user.accessToken);
 	const router = useRouter();
@@ -30,7 +28,6 @@ export const useMemoApi = () => {
 		setLoading(true);
 		const { data, error } = await supabase.from("note").select("*").order("created_at", { ascending: true });
 		setMemoList(data);
-		setApiData(data);
 		setLoading(false);
 		if (error) {
 			authErrorNavigate();
@@ -69,10 +66,8 @@ export const useMemoApi = () => {
 	const editMarkDiv = useCallback(async (id: string | undefined, body: body) => {
 		setLoading(true);
 		const editData = { ...body, user_id: user.sub };
-		await supabase.from("note").update(editData).eq("id", id);
-		const { data, error } = await supabase.from("note").select("*").order("created_at", { ascending: true });
-		setMemoList(data);
-		setLoading(false);
+		const { error } = await supabase.from("note").update(editData).eq("id", id);
+		fetchMemoList();
 		if (error) {
 			authErrorNavigate();
 		}
