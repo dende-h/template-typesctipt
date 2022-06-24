@@ -40,19 +40,3 @@ export type SlideSwitchProps = {
 	shadow?: EffectProps["shadow"];
 	colorScheme?: ThemeTypings["colorSchemes"] | (string & {});
 };
-
-export type CheckBoxProps = {
-	children: ReactNode;
-	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	isChecked?: boolean;
-	colorScheme?: ThemeTypings["colorSchemes"] | (string & {});
-	size?: ThemingProps<"Button">["size"];
-};
-
-export type SpinnerPropsType = {
-	size?: ThemingProps<"Spinner">["size"];
-	color?: SpinnerProps["color"];
-	emptyColor?: SpinnerProps["emptyColor"];
-	speed?: SpinnerProps["speed"];
-	thickness?: SpinnerProps["thickness"];
-};

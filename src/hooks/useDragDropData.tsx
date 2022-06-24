@@ -3,7 +3,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { todoDragDropObjectState } from "../globalState/board/todoDragDropObjectState";
 import { memoListState } from "../globalState/memo/memoListState";
 import { DragDropObjectType } from "../types/dragDropObjectType";
-import { FetchMemoList } from "../types/fetchMemoList";
 
 type DragDropObject = DragDropObjectType;
 
