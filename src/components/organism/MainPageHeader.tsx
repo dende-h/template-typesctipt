@@ -2,10 +2,28 @@ import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
 import { memo } from "react";
 import { useSetRecoilState } from "recoil";
 import { isShowTodo } from "../../globalState/board/isShowTodo";
+import { memoListState } from "../../globalState/memo/memoListState";
+import { userState } from "../../globalState/user/userState";
+import { User } from "../../types/user";
 import { PrimaryButton } from "../atoms/PrimaryButton";
 
 export const MainPageHeader = memo(() => {
 	const setIsShowTodoBoard = useSetRecoilState(isShowTodo);
+	const setMemoList = useSetRecoilState(memoListState);
+	const setUserInfo = useSetRecoilState<User>(userState);
+	const clickLogoutButton = () => {
+		setMemoList([]);
+		setUserInfo({
+			accessToken: "",
+			email: "",
+			email_verified: false,
+			name: "",
+			nickname: "",
+			picture: "",
+			sub: "",
+			updated_at: ""
+		});
+	};
 	return (
 		<>
 			<Flex bg="teal.100" w="100%" h={["50px", "60px", "70px"]} justifyContent={"center"} fontFamily={"cursive"}>
@@ -24,7 +42,12 @@ export const MainPageHeader = memo(() => {
 				</Box>
 				<Spacer />
 				<Box p={[0, 2, 3]}>
-					<PrimaryButton bgColor={"telegram.500"} color={"gray.50"} _hover={{ opacity: 0.6 }}>
+					<PrimaryButton
+						bgColor={"telegram.500"}
+						color={"gray.50"}
+						_hover={{ opacity: 0.6 }}
+						onClick={clickLogoutButton}
+					>
 						<a href="/api/auth/logout">ログアウト</a>
 					</PrimaryButton>
 				</Box>

@@ -43,8 +43,7 @@ export const ModalEditor: VFC<Props> = memo((props: Props) => {
 	const [newCategory, setNewCategory] = useRecoilState(categoryState);
 	const [newDate, setNewDate] = useRecoilState(dateState);
 	const [isDisabledSaveButton, setIsDisabledSaveButton] = useState(true);
-	const user = useRecoilValue(userState);
-	const { editMemoList, loading } = useMemoApi(user);
+	const { editMemoList, loading } = useMemoApi();
 
 	useEffect(() => {
 		(newTitle === `${title}` &&

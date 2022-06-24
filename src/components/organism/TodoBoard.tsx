@@ -2,10 +2,9 @@
 import { Box, HStack } from "@chakra-ui/react";
 import { memo } from "react";
 import { DragDropContext, DropResult, ResponderProvided } from "react-beautiful-dnd";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { completedFlag } from "../../globalState/board/completedFlag";
 import { startedFlag } from "../../globalState/board/startedFlag";
-import { userState } from "../../globalState/user/userState";
 
 //srcインポート
 import { useDragDropData } from "../../hooks/useDragDropData";
@@ -19,8 +18,7 @@ type onDragEnd = (result: DropResult, provided: ResponderProvided) => void;
 
 export const TodoBoard = memo(() => {
 	const { todoList, setTodoList, columnNumbers } = useDragDropData();
-	const user = useRecoilValue(userState);
-	const { editMarkDiv, loading } = useMemoApi(user);
+	const { editMarkDiv, loading } = useMemoApi();
 	const { modalOpenAndClose, onClose, isOpen } = useModalOpen();
 	const [isCompleted, setIsCompleted] = useRecoilState<boolean>(completedFlag);
 	const [isStarted, setIsStarted] = useRecoilState<boolean>(startedFlag);

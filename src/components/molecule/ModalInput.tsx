@@ -16,7 +16,7 @@ import {
 	IconButton
 } from "@chakra-ui/react";
 import { memo, useEffect, useState, VFC } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { categoryState } from "../../globalState/category/categoryState";
 import { dateState } from "../../globalState/date/dateState";
 import { useInputForm } from "../../hooks/useInputForm";
@@ -26,7 +26,6 @@ import { CustomDatePickerCalendar } from "./CustomDatePickerCalendar";
 import { RadioCategory } from "./RadioCategory";
 import format from "date-fns/format";
 import { AddIcon } from "@chakra-ui/icons";
-import { userState } from "../../globalState/user/userState";
 
 export const ModalInput: VFC = memo(() => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,8 +34,7 @@ export const ModalInput: VFC = memo(() => {
 	const [category, setCategory] = useRecoilState(categoryState);
 	const [date, setDate] = useRecoilState(dateState);
 	const [isDisabledSaveButton, setIsDisabledSaveButton] = useState(true);
-	const user = useRecoilValue(userState);
-	const { inputMemoList, loading } = useMemoApi(user);
+	const { inputMemoList, loading } = useMemoApi();
 
 	useEffect(() => {
 		title === "" || description === "" ? setIsDisabledSaveButton(true) : setIsDisabledSaveButton(false);

@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Center, Flex, Spinner, Text } from "@chakra-ui/react";
 import { Head } from "../components/templates/Head";
 import { getSession, useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
@@ -14,6 +14,7 @@ import { TodoBoard } from "../components/organism/TodoBoard";
 
 const Index = ({ user, note }) => {
 	const [isFetched, setIsFetched] = useState(false);
+	const [isUserFetched, setUserFetched] = useState(false);
 	const setMemos = useSetRecoilState(memoListState);
 	const setUser = useSetRecoilState(userState);
 	const isShowTodoBoard = useRecoilValue(isShowTodo);
@@ -28,7 +29,7 @@ const Index = ({ user, note }) => {
 	useEffect(() => {
 		if (isFetched) {
 			setUser(user);
-			console.log(user);
+			setUserFetched(true);
 		}
 	}, [isFetched]);
 
@@ -39,13 +40,18 @@ const Index = ({ user, note }) => {
 					<meta charSet="utf-8" />
 					<title>TopPage -Note me</title>
 				</Head>
-				{isFetched ? (
+				{isUserFetched ? (
 					<Flex>
 						<MemoList />
 						{isShowTodoBoard ? <TodoBoard /> : <Calendar />}
 					</Flex>
 				) : (
-					<Box>...Loading</Box>
+					<Center>
+						<Text p={100} fontSize={50}>
+							...Loading
+						</Text>
+						<Spinner />
+					</Center>
 				)}
 			</HeaderLayout>
 		</>

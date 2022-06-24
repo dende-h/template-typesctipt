@@ -24,8 +24,7 @@ type Props = {
 export const ModalValidate: VFC<Props> = memo((props: Props) => {
 	const { deleteMemo } = props;
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const user = useRecoilValue(userState);
-	const { deleteMemoList, loading } = useMemoApi(user);
+	const { deleteMemoList, loading } = useMemoApi();
 	const onClickDeleteButton = () => {
 		deleteMemoList(deleteMemo.id);
 	};
