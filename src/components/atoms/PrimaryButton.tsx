@@ -1,26 +1,11 @@
-import { Button } from "@chakra-ui/react";
-import { memo, VFC } from "react";
-import { PrimaryButtonProps } from "../../types/propsTypes";
+import { Button, ButtonProps } from "@chakra-ui/react";
+import { ReactNode, memo, VFC } from "react";
 
-type Props = PrimaryButtonProps;
+type Props = ButtonProps & {
+	childlen: ReactNode;
+};
 
 export const PrimaryButton: VFC<Props> = memo((props: Props) => {
-	const { children, mx, my, borderRadius, p, bgColor, isDisabled, shadow, size, color, _hover, onClick } = props;
-	return (
-		<Button
-			mx={mx}
-			my={my}
-			borderRadius={borderRadius}
-			p={p}
-			bgColor={bgColor}
-			isDisabled={isDisabled}
-			shadow={shadow}
-			size={size}
-			color={color}
-			_hover={_hover}
-			onClick={onClick}
-		>
-			{children}
-		</Button>
-	);
+	const { children, ...ButtonProps } = props;
+	return <Button {...ButtonProps}>{children}</Button>;
 });

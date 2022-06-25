@@ -1,10 +1,11 @@
-import { Radio } from "@chakra-ui/react";
-import { memo, VFC } from "react";
-import { RadioAtomsProps } from "../../types/propsTypes";
+import { Radio, RadioProps } from "@chakra-ui/react";
+import { memo, ReactNode, VFC } from "react";
 
-type Props = RadioAtomsProps;
+type Props = RadioProps & {
+	children: ReactNode;
+};
 
 export const RadioAtoms: VFC<Props> = memo((props: Props) => {
-	const { children, value } = props;
-	return <Radio value={value}>{children}</Radio>;
+	const { children, ...RadioProps } = props;
+	return <Radio {...RadioProps}>{children}</Radio>;
 });
