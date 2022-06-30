@@ -1,14 +1,10 @@
 import { Box, Stack, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { memo, useEffect, VFC } from "react";
-import toast from "react-hot-toast";
-import { useUser } from "@auth0/nextjs-auth0";
+import { memo, VFC } from "react";
 import { PrimaryButton } from "../atoms/PrimaryButton";
-import { useRouter } from "next/router";
 
 export const AppIntroduction: VFC = memo(() => {
 	const introductionTexts = ["ちょっとしたメモ", "予定のカレンダー", "TODOリスト"];
-	const router = useRouter();
 
 	return (
 		<Box

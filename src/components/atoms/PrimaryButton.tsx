@@ -2,7 +2,7 @@ import { Button, ButtonProps } from "@chakra-ui/react";
 import { ReactNode, memo, VFC } from "react";
 
 type Props = ButtonProps & {
-	childlen: ReactNode;
+	children: ReactNode;
 };
 
 export const PrimaryButton: VFC<Props> = memo((props: Props) => {
