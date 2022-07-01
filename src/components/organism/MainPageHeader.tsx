@@ -1,4 +1,5 @@
-import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import { Box, chakra, Flex, Spacer, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import { memo } from "react";
 import { useSetRecoilState } from "recoil";
 import { isShowTodo } from "../../globalState/board/isShowTodo";
@@ -48,7 +49,9 @@ export const MainPageHeader = memo(() => {
 						_hover={{ opacity: 0.6 }}
 						onClick={clickLogoutButton}
 					>
-						<a href="/api/auth/logout">ログアウト</a>
+						<Link href="/api/auth/logout">
+							<chakra.a>ログアウト</chakra.a>
+						</Link>
 					</PrimaryButton>
 				</Box>
 			</Flex>
