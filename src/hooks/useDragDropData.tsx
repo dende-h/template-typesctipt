@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { todoDragDropObjectState } from "../globalState/board/todoDragDropObjectState";
 import { memoListState } from "../globalState/memo/memoListState";
@@ -9,7 +9,12 @@ type DragDropObject = DragDropObjectType;
 export const useDragDropData = () => {
 	const initialMemoData = useRecoilValue(memoListState);
 	const [todoList, setTodoList] = useRecoilState(todoDragDropObjectState);
-	const columnNumbers = { todo: 0, inProgress: 1, completed: 2 };
+	const columnNumbers = useMemo(() => {
+		const todo = 0;
+		const inProgress = 1;
+		const completed = 2;
+		return { todo, inProgress, completed };
+	}, []);
 
 	useEffect(() => {
 		const categoryIsTodoList = initialMemoData.filter((item) => {
