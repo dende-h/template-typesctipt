@@ -1,4 +1,4 @@
-import { Box, Stack, Text } from "@chakra-ui/react";
+import { Box, Stack, Text, chakra } from "@chakra-ui/react";
 import Link from "next/link";
 import { memo, VFC } from "react";
 import { PrimaryButton } from "../atoms/PrimaryButton";
@@ -37,7 +37,7 @@ export const AppIntroduction: VFC = memo(() => {
 				<Box p={6}>
 					<PrimaryButton bgColor="teal.400" size="lg" _hover={{ opacity: 0.6 }}>
 						<Link href={"/api/auth/signup"}>
-							<a>新規アカウント登録</a>
+							<chakra.a>新規アカウント登録</chakra.a>
 						</Link>
 					</PrimaryButton>
 				</Box>
