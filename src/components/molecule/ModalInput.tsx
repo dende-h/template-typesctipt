@@ -38,6 +38,7 @@ export const ModalInput: VFC = memo(() => {
 	const setNewDate = () => {
 		setDate(format(new Date(), "yyyy/MM/dd"));
 	};
+	setNewDate();
 
 	useEffect(() => {
 		title === "" || description === "" ? setIsDisabledSaveButton(true) : setIsDisabledSaveButton(false);
@@ -48,9 +49,6 @@ export const ModalInput: VFC = memo(() => {
 			setTitle("");
 			setDescription("");
 			setCategory("メモ");
-			setNewDate();
-		}
-		if (isOpen) {
 			setNewDate();
 		}
 	}, [isOpen]);
