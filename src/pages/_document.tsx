@@ -1,13 +1,8 @@
-import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
+import NextDocument, { Html, Head, Main, NextScript} from "next/document";
 import { ColorModeScript } from "@chakra-ui/react";
-import { resetServerContext } from "react-beautiful-dnd";
 
 export default class Document extends NextDocument {
-	static async getInitialProps(ctx: DocumentContext) {
-		const initialProps = await NextDocument.getInitialProps(ctx);
-		resetServerContext();
-		return { ...initialProps };
-	}
+	
 
 	render() {
 		return (
